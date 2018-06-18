@@ -42,4 +42,13 @@
 <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css">
 <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+<style>
+    .error {
+        color: red;
+        font-size: 0.8em;
+    }
+    input.error{
+        border: red solid 1px;
+    }
+</style>
 @yield('after_stylesheet')

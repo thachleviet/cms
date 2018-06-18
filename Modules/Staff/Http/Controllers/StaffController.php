@@ -5,36 +5,45 @@ namespace Modules\Staff\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Staff\Entities\StaffTable;
 
 class StaffController extends BaseController
 {
+
+    protected $_staff ;
+
+    public function __construct(StaffTable $staffTable)
+    {
+        $this->_staff  =  $staffTable;
+    }
+
     /**
-     * Display a listing of the resource.
-     * @return Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
 
+        echo route('staff.create');
         return view('staff::staff.index',[
+            'object'=>$this->_staff->getAll(),
             'title'=>"Danh sách nhân viên"
         ]);
     }
 
+
     /**
-     * Show the form for creating a new resource.
-     * @return Response
+     * @return string
+     * @throws \Throwable
      */
     public function create()
     {
 
-
         return view('staff::staff.popup.create',['_title'=>'Thêm nhân viên'])->render();
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     * @param  Request $request
-     * @return Response
+     * @param Request $request
      */
     public function store(Request $request)
     {

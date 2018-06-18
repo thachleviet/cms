@@ -10,6 +10,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'admin', 'namespace' => 'Module
     // ROUTE ADMIN
     Route::group(['prefix'=>'staff'], function (){
         Route::get('/', 'StaffController@index')->name('staff');
-        Route::get('/modal-create', 'StaffController@create')->name('staff');
+        Route::get('/modal-create', 'StaffController@create')->name('staff.create');
     });
 });

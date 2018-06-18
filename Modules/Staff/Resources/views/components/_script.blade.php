@@ -1,5 +1,6 @@
 @yield('before_script')
 <script src="{{asset('backend/bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('public/js/laroute.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('backend/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- FastClick -->
@@ -19,4 +20,5 @@
 {{--<script src="{{asset('backend/dist/js/pages/dashboard2.js')}}"></script>--}}
 <!-- AdminLTE for demo purposes -->
 <script src="{{asset('backend/dist/js/demo.js')}}"></script>
+
 @yield('after_script')

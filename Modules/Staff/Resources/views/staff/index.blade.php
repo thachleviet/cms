@@ -4,6 +4,10 @@
     <link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css?v'.time())}}">
     <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css">
     <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+
+    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/bootstrap/dist/css/bootstrap-nav-wizard.css">
+
 @endsection
 @section('title',$title)
 @section('content')
@@ -101,11 +105,15 @@
     </section>
 @endsection
 @section('after_script')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
     <script src="{{asset('backend')}}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
     <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
     <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.fixedHeader.min.js"></script>
     <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
     <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+    <script src="{{asset('static/staff/staff/staff.js')}}"></script>
+
     {{--<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>--}}
     {{--<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>--}}
     <script>
@@ -118,20 +126,55 @@
                 'ordering'    : true,
                 'info'        : true,
                 'autoWidth'   : false
-            })
-        })
+            });
+            $('#form_add_staff').validate({
 
-        var Staff = {
 
-            createStaff:function () {
-                var modalElement  = '#myModal';
-                $.get('staff/modal-create', function (data) {
-                    $(modalElement).html(data);
-                    $(modalElement).modal('show');
+                rules: {
+                    fullname: {
+                        required: true
+                        //minlength: 5,
+                        //maxlength: 10,
+                        //email: true
+                        //startWithA: true
+                    }
+                    // customer_email: {
+                    //     required: true,
+                    //     email: true
+                    // },
+                    // customer_phone:  {
+                    //     required: true,
+                    //     number: true,
+                    // },
+                    // province_id: "required",
+                    // district_id: "required",
+                    // ward_id:"required",
+                    // customer_address:"required",
 
-                })
-            }
-        }
+                },
+                messages: {
+                    fullname: "Vui lòng nhập họ tên",
+                    // customer_email: {
+                    //     required: "Vui lòng nhập Email",
+                    //     email: "Email không hợp lệ"
+                    // },
+                    // customer_phone:  {
+                    //     required: "Vui lòng nhập số  điện thoại",
+                    //     number: "Vui lòng nhập giá trị là number"
+                    // },
+                    // province_id: "Vui lòng  chọn tỉnh thành",
+                    // district_id: "Vui lòng chọn quận huyện",
+                    // ward_id: "Vui lòng chọn xã phường",
+                    // customer_address:"Vui nhập địa chỉ liên hệ"
+                }
+            });
+        });
+        // $('#from_add_staff').submit(function (e) {
+        //
+        //     e.preventDefault();
+        // })
+
+
     </script>
 
 @stop

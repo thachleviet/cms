@@ -14,4 +14,9 @@ class StaffTable extends BaseModel
     protected $table        = 'staffs';
     protected $fillable     = [];
     protected $primaryKey   = 'staff_id';
+
+
+    public function getAll(){
+        return $this->from($this->table)->get() ;
+    }
 }
