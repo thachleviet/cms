@@ -17,13 +17,12 @@ class StaffController extends BaseController
         $this->_staff  =  $staffTable;
     }
 
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
-
-        echo route('staff.create');
         return view('staff::staff.index',[
             'object'=>$this->_staff->getAll(),
             'title'=>"Danh sách nhân viên"
@@ -38,7 +37,9 @@ class StaffController extends BaseController
     public function create()
     {
 
-        return view('staff::staff.popup.create',['_title'=>'Thêm nhân viên'])->render();
+        return view('staff::staff.popup.create',[
+            '_title'=>'Thêm nhân viên'
+        ])->render();
     }
 
 

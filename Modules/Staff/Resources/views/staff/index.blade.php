@@ -1,13 +1,18 @@
-
 @extends('staff::layouts.master')
 @section('after_stylesheet')
-    <link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css?v'.time())}}">
-    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css">
+    {{--<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css?v'.time())}}">--}}
+    {{--<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/fixedHeader.bootstrap.min.css?v='.time())}}">--}}
+    {{--<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css?v='.time())}}">--}}
+<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap/dist/css/bootstrap-nav-wizard.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?v='.time())}}">
 
-    <link rel="stylesheet" href="{{asset('backend')}}/bower_components/bootstrap/dist/css/bootstrap-nav-wizard.css">
-
+<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard.min.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_circles.min.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_arrows.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_dots.css?v='.time())}}">
+<link rel="stylesheet" href="{{asset('vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('backend/bower_components/select2/dist/css/select2.min.css?v='.time())}}">
 @endsection
 @section('title',$title)
 @section('content')
@@ -21,14 +26,11 @@
             <li class="active">Dashboard</li>
         </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
-
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
-
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="row">
@@ -49,7 +51,6 @@
                             <div class="col-xs-5">
                                 <a onclick="Staff.createStaff()" class="pull-right btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Thêm</a>
                                 {{--<button type="button" class="pull-right btn btn-info btn-sx" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Thêm</button>--}}
-
                             </div>
                             <div class="col-xs-5"></div>
                         </div>
@@ -101,19 +102,22 @@
             </div>
             <!-- /.col -->
         </div>
-
     </section>
 @endsection
 @section('after_script')
+    <script src="{{asset('static/js/lib/jquery-validate/jquery.validate.min.js?v='.time())}}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-    <script src="{{asset('backend')}}/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-    <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.fixedHeader.min.js"></script>
-    <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-    <script src="{{asset('backend')}}/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
-    <script src="{{asset('static/staff/staff/staff.js')}}"></script>
-
+    <script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.fixedHeader.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.responsive.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?v='.time())}}"></script>
+    <script src="{{asset('static/staff/staff/staff.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/smartWizard/jquery.smartWizard.min.js?v='.time())}}"></script>
+    <script src="{{asset('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js?v='.time())}}"></script>
+    <script src="{{asset('vendor/kartik-v/bootstrap-fileinput/themes/fa/theme.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/select2/dist/js/select2.min.js?v='.time())}}"></script>
     {{--<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>--}}
     {{--<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>--}}
     <script>
@@ -127,54 +131,79 @@
                 'info'        : true,
                 'autoWidth'   : false
             });
-            $('#form_add_staff').validate({
-
-
-                rules: {
-                    fullname: {
-                        required: true
-                        //minlength: 5,
-                        //maxlength: 10,
-                        //email: true
-                        //startWithA: true
+        });
+        $('select.select2').select2({
+        });
+        // with plugin options
+        $("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Toolbar extra buttons
+            var btnFinish = $('<button></button>').text('Finish')
+                .addClass('btn btn-info')
+                .on('click', function(){
+                    if( !$(this).hasClass('disabled')){
+                        var elmForm = $("#myForm");
+                        if(elmForm){
+                            elmForm.validator('validate');
+                            var elmErr = elmForm.find('.has-error');
+                            if(elmErr && elmErr.length > 0){
+                                alert('Oops we still have error in the form');
+                                return false;
+                            }else{
+                                alert('Great! we are ready to submit form');
+                                elmForm.submit();
+                                return false;
+                            }
+                        }
                     }
-                    // customer_email: {
-                    //     required: true,
-                    //     email: true
-                    // },
-                    // customer_phone:  {
-                    //     required: true,
-                    //     number: true,
-                    // },
-                    // province_id: "required",
-                    // district_id: "required",
-                    // ward_id:"required",
-                    // customer_address:"required",
-
+                });
+            var btnCancel = $('<button></button>').text('Cancel')
+                .addClass('btn btn-danger')
+                .on('click', function(){
+                    $('#smartwizard').smartWizard("reset");
+                    $('#myForm').find("input, textarea").val("");
+                });
+            // Smart Wizard
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                theme: 'dots',
+                transitionEffect:'fade',
+                toolbarSettings: {toolbarPosition: 'bottom',
+                    toolbarExtraButtons: [btnFinish, btnCancel]
                 },
-                messages: {
-                    fullname: "Vui lòng nhập họ tên",
-                    // customer_email: {
-                    //     required: "Vui lòng nhập Email",
-                    //     email: "Email không hợp lệ"
-                    // },
-                    // customer_phone:  {
-                    //     required: "Vui lòng nhập số  điện thoại",
-                    //     number: "Vui lòng nhập giá trị là number"
-                    // },
-                    // province_id: "Vui lòng  chọn tỉnh thành",
-                    // district_id: "Vui lòng chọn quận huyện",
-                    // ward_id: "Vui lòng chọn xã phường",
-                    // customer_address:"Vui nhập địa chỉ liên hệ"
+                anchorSettings: {
+                    markDoneStep: true, // add done css
+                    markAllPreviousStepsAsDone: true, // When a step selected by url hash, all previous steps are marked done
+                    removeDoneStepOnNavigateBack: true, // While navigate back done step after active step will be cleared
+                    enableAnchorOnDoneStep: true // Enable/Disable the done steps navigation
+                }
+            });
+
+            $("#smartwizard").on("leaveStep", function(e, anchorObject, stepNumber, stepDirection) {
+                var elmForm = $("#form-step-" + stepNumber);
+                // stepDirection === 'forward' :- this condition allows to do the form validation
+                // only on forward navigation, that makes easy navigation on backwards still do the validation when going next
+                if(stepDirection === 'forward' && elmForm){
+                    elmForm.validator('validate');
+                    var elmErr = elmForm.children('.has-error');
+                    if(elmErr && elmErr.length > 0){
+                        // Form validation failed
+                        return false;
+                    }
+                }
+                return true;
+            });
+
+            $("#smartwizard").on("showStep", function(e, anchorObject, stepNumber, stepDirection) {
+                // Enable finish button only on last step
+                if(stepNumber == 3){
+                    $('.btn-finish').removeClass('disabled');
+                }else{
+                    $('.btn-finish').addClass('disabled');
                 }
             });
         });
-        // $('#from_add_staff').submit(function (e) {
-        //
-        //     e.preventDefault();
-        // })
-
-
     </script>
-
 @stop
