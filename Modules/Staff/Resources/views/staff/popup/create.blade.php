@@ -152,10 +152,7 @@
         color: white;
         box-shadow: 0 2px 5px 0 rgba(152, 33, 33, 0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
     }
-    .box-shadow{
-        box-shadow: 2px 2px 5px 2px rgba(152, 33, 33, 0.16), 2px 2px 7px 2px rgba(0,0,0,0.12);
-        border-radius: 0;
-    }
+
 </style>
 <div class="modal-dialog modal-lg" >
     <!-- Modal content-->
@@ -164,7 +161,8 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title colorpicker-alpha"><i class="fa fa-th"></i> {{$_title}} </h4>
         </div>
-        <form id="form_add_staff"  method="post"  onsubmit="return false">
+        <form id="form_add_staff"  method="post"  onsubmit="return false" enctype="multipart/form-data">
+            {!! csrf_field() !!}
         <div class="modal-body">
             <ul  class="nav nav-wizard">
                 <li class="active " >
@@ -172,47 +170,46 @@
                 </li>
                 <li><a href="#2b" data-toggle="tab">Hình đại diện </a>
                 </li>
-                {{--<li><a href="#3b" data-toggle="tab">Applying clearfix</a>--}}
-                {{--</li>--}}
-                {{--<li><a href="#4a" data-toggle="tab">Background color</a>--}}
-                {{--</li>--}}
             </ul>
             <div class="tab-content clearfix" style="position: relative">
+                <div id="error_staff" style="padding-top: 10px;"></div>
                 <div class="tab-pane active" id="1b">
                     <section>
                         <div class="content-tap" style="padding-top: 20px">
+
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="first_name">First Name <span style="color: red"> * </span></label>
+                                    <label for="staff_first_name">First Name <span style="color: red"> * </span></label>
 
-                                    <input type="text" class="form-control"  id="first_name" name="first_name"  placeholder="Enter first name">
+                                    <input type="text" class="form-control"  id="staff_first_name" name="staff_first_name"  placeholder="Enter first name">
                                     <small  class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="last_name">Last Name <span style="color: red"> * </span></label>
-                                    <input type="text" class="form-control" name="last_name"  placeholder="Enter last name">
-                                    <small id="last_name" class="form-text text-muted"></small>
+                                    <label for="staff_last_name">Last Name <span style="color: red"> * </span></label>
+                                    <input type="text" class="form-control" name="staff_last_name"  placeholder="Enter last name">
+                                    <small id="staff_last_name" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="email">Email address <span style="color: red"> * </span></label>
-                                    <input type="email" class="form-control" name="email"  placeholder="Enter email">
-                                    <small id="email" class="form-text text-muted"></small>
+                                    <label for="staff_email">Email address <span style="color: red"> * </span></label>
+                                    <input type="text" class="form-control" name="staff_email"  placeholder="Enter email">
+                                    <small id="staff_email" class="form-text text-muted"></small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="phone">Phone <span style="color: red"> * </span></label>
-                                    <input type="text" class="form-control" name="phone" placeholder="Enter phone">
+                                    <label for="staff_phone">Phone <span style="color: red"> * </span></label>
+                                    <input type="text" class="form-control" name="staff_phone" placeholder="Enter phone">
                                 </div>
                             </div>
                         </div>
                     </section>
                 </div>
                 <div class="tab-pane" id="2b">
-                    <section>
+                    {{--<section>--}}
+
                         <div class="content-tap" style="padding-top: 20px">
                             <div class="col-sm-4 text-center">
                                 <div class="kv-avatar">
                                     <div class="file-loading">
-                                        <input id="avatar-2" name="avatar-2" type="file" required>
+                                        <input id="avatar-2" name="staff_avatar" type="file" multiple="multiple">
                                     </div>
                                 </div>
                             </div>
@@ -223,15 +220,15 @@
                                         <div class="col-sm-9 input-group">
                                             <div class="label-check col-sm-12">
                                                 <div class=" col-sm-3" >
-                                                    <input type="radio" name="gender" id="radio1_Opt1" value="1" checked>
+                                                    <input type="radio" name="staff_gender" id="radio1_Opt1" value="male" checked>
                                                     <label for="radio1_Opt1">Nam</label>
                                                 </div>
                                                 <div class=" col-sm-3">
-                                                    <input type="radio" name="gender" id="radio1_Opt2" value="0" >
+                                                    <input type="radio" name="staff_gender" id="radio1_Opt2" value="female" >
                                                     <label for="radio1_Opt2">Nữ</label>
                                                 </div>
                                                 <div class=" col-sm-3">
-                                                    <input type="radio" name="gender" id="radio1_Opt3" value="0" >
+                                                    <input type="radio" name="staff_gender" id="radio1_Opt3" value="other" >
                                                     <label for="radio1_Opt3">Khác</label>
                                                 </div>
                                             </div>
@@ -250,9 +247,7 @@
                                         </div>
                                         <small  class="form-text text-muted"></small>
                                     </div>
-
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group">
                                         <label class="col-sm-3" for="first_name">Trạng thái </label>
@@ -270,19 +265,17 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group">
                                         <label class="col-sm-3" for="first_name">Group <span style="color: red"> * </span></label>
                                         <div class="col-sm-9 input-group">
                                             <select class="form-control select2" name="group_id">
-                                                <option value="">Nhóm admin</option>
+                                                <option value="1">Nhóm admin</option>
                                                 <option value="">Nhóm quản lý</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
                                     <div class="form-group">
                                         <label class="col-sm-3" for="first_name">Ghi chú </label>
@@ -293,42 +286,25 @@
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    {{--</section>--}}
                 </div>
-                {{--<div class="tab-pane" id="3b">--}}
-                    {{--<h3>We applied clearfix to the tab-content to rid of the gap between the tab and the content</h3>--}}
-                {{--</div>--}}
-                {{--<div class="tab-pane" id="4b">--}}
-                    {{--<h3>We use css to change the background color of the content to be equal to the tab</h3>--}}
-                {{--</div>--}}
             </div>
         </div>
         <div class="modal-footer">
-            {{--<nav class="navbar btn-toolbar sw-toolbar sw-toolbar-bottom text-center">--}}
-                {{--<div class="btn-group navbar-btn sw-btn-group-extra pull-c" role="group">--}}
-
-                 {{--</div>--}}
-            {{--<div class="btn-group navbar-btn sw-btn-group pull-right" role="group">--}}
-            {{--<button class="btn btn-default sw-btn-prev" type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>--}}
-            {{--<button class="btn btn-default sw-btn-next" type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>--}}
-            {{--</div>--}}
-            {{--</nav>--}}
             <div class="col-sm-offset-4 col-sm-4">
                 <button type="submit"  id="registerButtonModal" class="btn btn-success box-shadow"><i class="fa fa-save"></i> Lưu</button>
                 <button class="btn btn-danger box-shadow" type="reset"><i class="fa fa-reply-all" aria-hidden="true"></i> Refresh</button>
                 <button class="btn btn-warning box-shadow" data-dismiss="modal" aria-label="Close"><i class="fa fa-close" aria-hidden="true"></i> Close</button>
             </div>
-
-
-
         </div>
         </form>
     </div>
-
 </div>
+
 <script>
+
     $(document).ready(function() {
-        orderSubmit._init() ;
+        Staff.submitAdd() ;
         $('.datepicker').datepicker({
             format: 'dd-mm-yy'
         });
