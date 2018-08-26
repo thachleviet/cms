@@ -12,6 +12,10 @@ class HomeController extends BaseController
      * Display a listing of the resource.
      * @return Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
 
     public function index()
     {

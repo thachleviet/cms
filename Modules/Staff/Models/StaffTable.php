@@ -6,24 +6,57 @@
  * Time: 12:00 AM
  */
 
-namespace Modules\Staff\Entities;
-
-
+namespace Modules\Staff\Models;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
 
-class StaffTable extends BaseModel
+class StaffTable extends Authenticatable
 {
+    use Notifiable;
+
+    protected $guard        = 'admin';
     protected $table        = 'staffs';
-    protected $fillable     = ['staff_id', 'staff_full_name' ,'staff_first_name', 'staff_last_name', 'staff_email', 'staff_phone', 'staff_birthday', 'staff_facebook', 'staff_gender', 'staff_avatar', 'staff_description', 'is_active', 'is_delete', 'ward_id', 'district_id', 'province_id', 'created_at', 'created_by', 'updated_at', 'updated_by'];
+    protected $fillable     = [
+        'password',
+        'remember_token',
+        'staff_id',
+        'staff_full_name' ,
+        'staff_first_name',
+        'staff_last_name',
+        'staff_email',
+        'staff_phone',
+        'staff_birthday',
+        'staff_facebook',
+        'staff_gender',
+        'staff_avatar',
+        'staff_description',
+        'is_active',
+        'is_delete',
+        'ward_id',
+        'district_id',
+        'province_id',
+        'created_at',
+        'created_by',
+        'updated_at',
+        'updated_by'
+    ];
     protected $primaryKey   = 'staff_id';
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     /**
      * @return mixed
      */
+
     public function getAll($status = null){
 
         \DB::statement(\DB::raw('set @rownum=0'));
+
         $oSelect = $this->from($this->table .' as staff');
+
         $oSelect->select(
             DB::raw('@rownum  := @rownum  + 1 AS rownum'),
             'staff_id',
@@ -46,7 +79,8 @@ class StaffTable extends BaseModel
         );
         $oSelect->selectRaw(DB::raw("CONCAT(staff_first_name ,' ',staff_last_name) as staff_full_name"));
         $oSelect->where('staff.is_delete',0);
-        if(isset($status) && !empty($status)){
+        if (isset($status) && !empty($status))
+        {
             $oSelect->where('staff.is_active',($status  == 'active' ) ? 0 : 1);
         }
         $oSelect->orderBy('staff_id', 'desc');
@@ -70,7 +104,6 @@ class StaffTable extends BaseModel
      * @return string
      */
     public function edit(array  $attribute  , $id){
-
         try{
            return $this->where('staff_id' , (int)$id)->update($attribute) ;
         }catch (\Exception $exception){

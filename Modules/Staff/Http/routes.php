@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'admin', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
+Route::group(['middleware' => ['web', 'auth:admin'], 'prefix' => 'admin', 'namespace' => 'Modules\Staff\Http\Controllers'], function()
 {
     // ROUTE HOME ADMIN
     Route::get('/', 'HomeController@index')->name('admin');
@@ -22,7 +22,8 @@ Route::group(['middleware' => 'web', 'prefix' => 'admin', 'namespace' => 'Module
     // ROUTE CATEGORY
     Route::group(['prefix'=>'category'], function (){
         Route::get('/', 'CategoryController@index')->name('category');
-        Route::post('/get-list-staff', 'CategoryController@getListCategory')->name('staff.get-list-category');
+        Route::post('/update-category', 'CategoryController@updateCategory')->name('category.update-category');
+
 //        Route::get('/modal-create', 'StaffController@create')->name('staff.create');
 //        Route::get('/modal-edit/{id}', 'StaffController@edit')->name('staff.edit');
 //        Route::post('/create-staff', 'StaffController@store')->name('staff.create-staff');

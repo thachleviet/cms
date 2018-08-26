@@ -1,17 +1,17 @@
-@extends('staff::layouts.master')
+@extends('backend.layouts.master')
 @section('after_stylesheet')
-<link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap/dist/css/bootstrap-nav-wizard.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_circles.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_arrows.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_dots.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/multi-select/multi-select.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('backend/bower_components/select2/dist/css/select2.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/jquery-confirm/jquery-confirm.min.css?v='.time())}}">
-<link rel="stylesheet" href="{{asset('static/css/lib/toastr/toastr.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('backend/bower_components/datatables.net-bs/css/responsive.bootstrap.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap/dist/css/bootstrap-nav-wizard.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_circles.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_arrows.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/smartWizard/smart_wizard_theme_dots.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/multi-select/multi-select.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('backend/bower_components/select2/dist/css/select2.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/jquery-confirm/jquery-confirm.min.css?v='.time())}}">
+    <link rel="stylesheet" href="{{asset('static/css/lib/toastr/toastr.min.css?v='.time())}}">
     <style>
         .box-shadow{
             box-shadow: 1px 1px 3px 1px rgba(152, 33, 33, 0.16), 1px 1px 4px 1px rgba(0,0,0,0.12);
@@ -111,64 +111,64 @@
     </section>
 @endsection
 @section('after_script')
-<script src="{{asset('static/js/lib/jquery-validate/jquery.validate.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.fixedHeader.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.responsive.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?v='.time())}}"></script>
-<script src="{{asset('static/staff/staff/staff.js?v='.time())}}"></script>
-<script src="{{asset('static/js/lib/smartWizard/jquery.smartWizard.min.js?v='.time())}}"></script>
-<script src="{{asset('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js?v='.time())}}"></script>
-<script src="{{asset('vendor/kartik-v/bootstrap-fileinput/themes/fa/theme.min.js?v='.time())}}"></script>
-<script src="{{asset('backend/bower_components/select2/dist/js/select2.min.js?v='.time())}}"></script>
-<script src="{{asset('static/js/lib/toastr/toastr.min.js?v='.time())}}"></script>
-<script src="{{asset('static/js/lib/jquery-confirm/jquery-confirm.min.js?v='.time())}}"></script>
-<script src="{{asset('static/js/lib/multi-select/jquery.multi-select.js?v='.time())}}"></script>
-<script src="{{asset('static/js/lib/quicksearch/jquery.quicksearch.js?v='.time())}}"></script>
-<script>
-    $(function() {
-        $('select.select2').select2({
+    <script src="{{asset('static/js/lib/jquery-validate/jquery.validate.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net/js/jquery.dataTables.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.fixedHeader.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/dataTables.responsive.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js?v='.time())}}"></script>
+    <script src="{{asset('static/staff/staff/staff.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/smartWizard/jquery.smartWizard.min.js?v='.time())}}"></script>
+    <script src="{{asset('vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js?v='.time())}}"></script>
+    <script src="{{asset('vendor/kartik-v/bootstrap-fileinput/themes/fa/theme.min.js?v='.time())}}"></script>
+    <script src="{{asset('backend/bower_components/select2/dist/js/select2.min.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/toastr/toastr.min.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/jquery-confirm/jquery-confirm.min.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/multi-select/jquery.multi-select.js?v='.time())}}"></script>
+    <script src="{{asset('static/js/lib/quicksearch/jquery.quicksearch.js?v='.time())}}"></script>
+    <script>
+        $(function() {
+            $('select.select2').select2({
+            });
+            Staff._init();
         });
-        Staff._init();
-    });
-    $('.searchable').multiSelect({
-        selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"12\"'>",
-        selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"4\"'>",
-        afterInit: function(ms){
-            var that = this,
-                $selectableSearch = that.$selectableUl.prev(),
-                $selectionSearch = that.$selectionUl.prev(),
-                selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
-                selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+        $('.searchable').multiSelect({
+            selectableHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"12\"'>",
+            selectionHeader: "<input type='text' class='search-input' autocomplete='off' placeholder='try \"4\"'>",
+            afterInit: function(ms){
+                var that = this,
+                    $selectableSearch = that.$selectableUl.prev(),
+                    $selectionSearch = that.$selectionUl.prev(),
+                    selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+                    selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
 
-            that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
-                .on('keydown', function(e){
-                    if (e.which === 40){
-                        that.$selectableUl.focus();
-                        return false;
-                    }
-                });
+                that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                    .on('keydown', function(e){
+                        if (e.which === 40){
+                            that.$selectableUl.focus();
+                            return false;
+                        }
+                    });
 
-            that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
-                .on('keydown', function(e){
-                    if (e.which == 40){
-                        that.$selectionUl.focus();
-                        return false;
-                    }
-                });
-        },
-        afterSelect: function(){
-            this.qs1.cache();
-            this.qs2.cache();
-        },
-        afterDeselect: function(){
-            this.qs1.cache();
-            this.qs2.cache();
-        }
-    });
-</script>
+                that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                    .on('keydown', function(e){
+                        if (e.which == 40){
+                            that.$selectionUl.focus();
+                            return false;
+                        }
+                    });
+            },
+            afterSelect: function(){
+                this.qs1.cache();
+                this.qs2.cache();
+            },
+            afterDeselect: function(){
+                this.qs1.cache();
+                this.qs2.cache();
+            }
+        });
+    </script>
 
 <script>
     $(document).ready(function(){

@@ -5,7 +5,7 @@ namespace Modules\Staff\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
-use Modules\Staff\Entities\StaffTable;
+use Modules\Staff\Models\StaffTable;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,25 +17,25 @@ class StaffController extends BaseController
 
     public function __construct(StaffTable $staffTable)
     {
+        $this->middleware('auth:admin');
+
         $this->_staff  =  $staffTable;
     }
 
 
     public function index(Request $request)
     {
-
         return view('staff::staff.index',[
             'title'=>"Danh sách nhân viên"
         ]);
     }
-
-
     /**
      * @author Le Viet Thach
      * @return mixed
      * @throws \Exception
      */
-    public function getListStaff(Request $request){
+    public function getListStaff(Request $request)
+    {
         $param  = $request->input(['keyword']);
 
         $status = $request->input('status', " ") ;
@@ -43,16 +43,14 @@ class StaffController extends BaseController
         return DataTables::of($this->_staff->getAll($status) )
             ->filter(function($query) use ($param , $status){
 
-                $query->where(function($q) use($param, $status){
-
+                $query->where(function($q) use($param, $status)
+                {
                     if(!empty($param)){
                         $q->where('staff_email', 'LIKE', '%'.$param.'%');
                         $q->orWhere('staff_phone', 'LIKE', '%'.$param.'%');
                         $q->orWhere('staff_full_name', 'LIKE', '%'.$param.'%');
                     }
-
                 });
-
 
             })
             ->addColumn('action', function ($oSelect){
@@ -78,14 +76,17 @@ class StaffController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      */
     public function changeStatus(Request $request){
-        try{
-            if($this->_staff->changStatus($request->all(['is_active']) , $request->input('id'))){
+        try
+        {
+            if ($this->_staff->changStatus($request->all(['is_active']) , $request->input('id')))
+            {
                 return response()->json(['status'=>true, 'messages'=>'Cập  dữ liệu thành công !']) ;
             }
-        }catch (\Exception $exception){
+        }
+        catch (\Exception $exception)
+        {
               return response()->json(['status'=>false, 'messages'=>'Đã xảy ra lỗi !']) ;
         }
-
     }
     /**
      * @return string
@@ -107,7 +108,8 @@ class StaffController extends BaseController
     {
         DB::beginTransaction();
         try{
-            if($request->isMethod('post')){
+            if ($request->isMethod('post'))
+            {
                 $validator  = Validator::make($request->all() , [
                     'staff_first_name'  => 'required',
                     'staff_last_name'   => 'required',
@@ -123,7 +125,8 @@ class StaffController extends BaseController
                     'staff_phone.unique'        =>  'Số điện thoại đã tồn tại',
                 ]) ;
 
-                if($validator->fails()){
+                if ($validator->fails())
+                {
                     return response()->json(['errors'=>$validator->errors()]) ;
                 }
                 $this->_staff->add($this->arrayObject($request, 'add'));
@@ -140,21 +143,23 @@ class StaffController extends BaseController
 
     function arrayObject($request , $action)
     {
-        if ($action == 'add') {
+        if ($action == 'add')
+        {
             $array = [
-                'staff_first_name'  => $request->input('staff_first_name'),
-                'staff_last_name'   => $request->input('staff_last_name'),
-                'staff_full_name'   => ($request->input('staff_first_name'). ' ' . $request->input('staff_last_name')),
-                'staff_email'       => $request->input('staff_email'),
-                'staff_phone'       => $request->input('staff_phone'),
+                'staff_first_name'  => $request->staff_first_name,
+                'staff_last_name'   => $request->staff_last_name,
+                'staff_full_name'   => ($request->staff_first_name. ' ' . $request->staff_last_name),
+                'staff_email'       => $request->staff_email,
+                'staff_phone'       => $request->staff_phone,
                 'created_at'        => date('Y-m-d H:i:s'),
-                'staff_gender'      => $request->input('staff_gender'),
-                'staff_birthday'    => date('Y-m-d H:i:s', strtotime($request->input('staff_birthday'))),
-                'is_active'         => $request->input('is_active'),
-                'group_id'          => $request->input('group_id'),
-                'staff_description' => $request->input('staff_description'),
+                'staff_gender'      => $request->staff_gender,
+                'staff_birthday'    => date('Y-m-d H:i:s', strtotime($request->staff_birthday)),
+                'is_active'         => $request->is_active,
+                'group_id'          => $request->group_id,
+                'staff_description' => $request->staff_description,
             ];
-            if ($request->hasFile('staff_avatar')) {
+            if ($request->hasFile('staff_avatar'))
+            {
                 $array['staff_avatar'] = 'uploads/' . $this->uploadFiles($request, 'staff_avatar', 'staff_avatar', 'uploads', time());
                 return array_merge($array, $array);
             }
@@ -162,19 +167,20 @@ class StaffController extends BaseController
             return $array;
         } else {
             $array = [
-                'staff_first_name'  => $request->input('staff_first_name'),
-                'staff_last_name'   => $request->input('staff_last_name'),
-                'staff_full_name'   => ($request->input('staff_first_name'). ' ' . $request->input('staff_last_name')),
-                'staff_email'       => $request->input('staff_email'),
-                'staff_phone'       => $request->input('staff_phone'),
+                'staff_first_name'  => $request->staff_first_name,
+                'staff_last_name'   => $request->staff_last_name,
+                'staff_full_name'   => ($request->staff_first_name. ' ' . $request->staff_last_name),
+                'staff_email'       => $request->staff_email,
+                'staff_phone'       => $request->staff_phone,
                 'updated_at'        => date('Y-m-d H:i:s'),
-                'staff_gender'      => $request->input('staff_gender'),
-                'staff_birthday'    => date('Y-m-d H:i:s', strtotime($request->input('staff_birthday'))),
-                'is_active'         => $request->input('is_active'),
-                'group_id'          => $request->input('group_id'),
-                'staff_description' => $request->input('staff_description'),
+                'staff_gender'      => $request->staff_gender,
+                'staff_birthday'    => date('Y-m-d H:i:s', strtotime($request->staff_birthday)),
+                'is_active'         => $request->is_active,
+                'group_id'          => $request->group_id,
+                'staff_description' => $request->staff_description,
             ];
-            if ($request->hasFile('staff_avatar')){
+            if ($request->hasFile('staff_avatar'))
+            {
                 $array['staff_avatar'] = 'uploads/' . $this->uploadFiles($request, 'staff_avatar', 'staff_avatar', 'uploads', time());
                 return array_merge($array, $array);
             }
@@ -219,7 +225,8 @@ class StaffController extends BaseController
     {
         DB::beginTransaction();
         try{
-            if($request->isMethod('post')){
+            if ($request->isMethod('post'))
+            {
                 $validator  = Validator::make($request->all() , [
                     'staff_first_name'  => 'required',
                     'staff_last_name'   => 'required',
@@ -235,11 +242,13 @@ class StaffController extends BaseController
                     'staff_phone.unique'        =>  'Số điện thoại đã tồn tại',
                 ]) ;
 
-                if($validator->fails()){
+                if ($validator->fails())
+                {
                     return response()->json(['errors'=>$validator->errors()]) ;
                 }
 
-                if($request->hasFile('staff_avatar')){
+                if ( $request->hasFile('staff_avatar') )
+                {
 
                     $object = $this->_staff->getItem($request->input('staff_id')) ;
                     $this->validate($request, [
@@ -247,8 +256,10 @@ class StaffController extends BaseController
                     ],[
                         'staff_avatar.mimes'         =>'Hình ảnh phải đúng đinh dạng jpeg,jpg,png',
                     ]);
-                    if(!empty($object['staff_avatar'])){
-                        if(is_file(base_path().'/'.$object['staff_avatar'].'')){
+                    if ( !empty ( $object['staff_avatar'] ) )
+                    {
+                        if ( is_file(base_path().'/'.$object['staff_avatar'].''))
+                        {
                             unlink(base_path().'/'.$object['staff_avatar'].'');
                         }
                     }
@@ -272,7 +283,8 @@ class StaffController extends BaseController
     public function destroy($id)
     {
         try{
-            if($this->_staff->deletes($id)){
+            if ($this->_staff->deletes($id))
+            {
                 return response()->json(['status'=>true, 'messages'=>'Xóa dữ liệu thành công !']) ;
             };
         }catch (\Exception $exception){
@@ -287,13 +299,15 @@ class StaffController extends BaseController
     // function upload files
     public function uploadFiles($request , $fileName ,$prefix = null, $uploads = 'uploads', $time , $option = null){
         $names = '';
-        if($option == 'image_child'){
+        if ($option == 'image_child')
+        {
             $names 	= $time.'_'.date('d_m_Y').'_'.$prefix.'.'.$fileName->getClientOriginalExtension();
             $destinationPath = base_path($uploads);
             $fileName->move($destinationPath, $names);
             return $names ;
         }
-        if($request->hasFile($fileName)){
+        if ($request->hasFile($fileName))
+        {
             $image  = $request->file($fileName);
             $names 	= time().'_'.date('d_m_Y').'_'.$prefix.'.'.$image->getClientOriginalExtension();
             $destinationPath = base_path($uploads.'/'.$names);
@@ -306,15 +320,17 @@ class StaffController extends BaseController
      * @return string
      * @throws \Throwable
      */
-    public function showChangeAction(Request $request){
-
+    public function showChangeAction(Request $request)
+    {
         return view('staff::staff.popup.show-change-action',[
             '_title'=>"Danh sách nhân viên"
         ])->render();
     }
 
-    public function getListStatus(Request $request){
-        if($request->isMethod('post')){
+    public function getListStatus(Request $request)
+    {
+        if ($request->isMethod('post'))
+        {
             $this->_staff->getAll();
         }
     }

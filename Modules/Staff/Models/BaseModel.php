@@ -6,7 +6,7 @@
  * Time: 12:01 AM
  */
 
-namespace Modules\Staff\Entities;
+namespace Modules\Staff\Models;
 
 
 use Illuminate\Database\Eloquent\Model;
